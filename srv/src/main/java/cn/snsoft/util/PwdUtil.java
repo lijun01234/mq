@@ -1,4 +1,4 @@
-package cn.snsoft;
+package cn.snsoft.util;
 
 import java.io.IOException;
 import com.sun.org.apache.xml.internal.security.utils.Base64;

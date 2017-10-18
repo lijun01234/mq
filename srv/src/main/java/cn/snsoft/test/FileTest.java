@@ -1,4 +1,4 @@
-package cn.snsoft.io;
+package cn.snsoft.test;
 
 public class FileTest
 {
