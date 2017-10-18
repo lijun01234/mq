@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace-list>
+	<workspace id="CLOUD_STANDARD" ftclimdbsysid="0%" title="标准开发标准库">
+		<datasource id="CONFIG" host="10.77.4.1" port="1521"
+			database="orcl" user="config_silin9_dev" password="config_silin9_dev"
+			type="2" />
+		<datasource id="WRITE" host="10.77.4.1" port="1521"
+			database="orcl" user="busi_silin9_dev" password="busi_silin9_dev"
+			type="2" />
+		<datasource id="MQ" host="127.0.0.1" port="3306"
+			database="world" user="root" password="root"
+			type="2" />
+	</workspace>
+</workspace-list>
