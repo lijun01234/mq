@@ -16,5 +16,31 @@
 	   http://cxf.apache.org/schemas/jaxws.xsd
 	   http://www.springmodules.org/schema/oscache 
 	   http://www.springmodules.org/schema/cache/springmodules-oscache.xsd">
+	<!-- spring的Redis缓存连接工厂 -->
+	<bean id="component-RedisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="component-JedisConnectionFactory" />
+		<property name="keySerializer">
+			<bean class="cn.snsoft.component.cache.serializer.BurlapSerializer" />
+		</property>
+	</bean>
 
+	<!-- 改为使用工厂(实例)来构建 -->
+	<bean id="component-JedisConnectionFactory" factory-bean="component-SNJedisConnectionFactoryFactory"
+		factory-method="createDefaultJedisConnectionFactory">
+	</bean>
+
+	<bean id="component-SNJedisConnectionFactoryFactory"
+		class="cn.snsoft.component.cache.factory.SNJedisConnectionFactoryFactory"
+		init-method="init">
+		<!-- 读取Config中的Spring.Context.Component.RedisMasterHostName, Spring.Context.Component.RedisMasterPort, 
+			Spring.Context.Component.RedisMasterPassword, Spring.Context.Component.RedisClusterHostAndPorts 
+			配合cn.snsoft.rootbase.servlet.ServletContextListener监听 -->
+		<property name="hostName"
+			value="10.77.6.1" />
+		<property name="port" value="6379" />
+		<property name="password"
+			value="${Spring.Context.Component.RedisMasterPassword}" />
+		<property name="clusterHostAndPorts"
+			value="${Spring.Context.Component.RedisClusterHostAndPorts}" />
+	</bean>
 </beans>
