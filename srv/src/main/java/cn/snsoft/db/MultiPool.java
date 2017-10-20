@@ -91,7 +91,7 @@ public class MultiPool
 		}
 		pool.get(dbType).add(conn); //连接池增加一个连接
 		free.get(dbType).add(conn); //同时往空闲池增加一个连接
-		System.out.println("add");
+		//System.out.println("add");
 	}
 
 	/***
