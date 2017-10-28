@@ -3,7 +3,6 @@ package cn.snsoft.mq.scan;
 import java.util.Map;
 import cn.snsoft.base.cache.redis.RedisCompLock;
 import cn.snsoft.mq.model.MQSysConn;
-import cn.snsoft.mq.model.MqScanConf;
 import cn.snsoft.mq.model.MqScanConfMatch;
 /**
  * <p>标题：文件目录扫描锁 </p>
@@ -28,25 +27,25 @@ public class MQScanFilesLock extends RedisCompLock
 
 	/**目录扫描定义 相关锁定操作**/
 	//目录锁定
-	public boolean scanFilesLock(MqScanConf scanConf, String className)
-	{
-		if (isScanFilesStop(className, scanConf.getScid()))
-		{
-			return true;
-		}
-		String key = className + ':' + scanConf.getScid();
-		boolean isLock = this.lock(key);
-		if (isLock)
-		{
-			long lock = this.decr(key);
-			if (lock <= 1)
-			{
-				this.destroy(key);
-				return false;
-			}
-		}
-		return isLock;
-	}
+	//public boolean scanFilesLock(MqScanConf scanConf, String className)
+	//{
+	//	if (isScanFilesStop(className, scanConf.getScid()))
+	//	{
+	//		return true;
+	//	}
+	//	String key = className + ':' + scanConf.getScid();
+	//	boolean isLock = this.lock(key);
+	//	if (isLock)
+	//	{
+	//		long lock = this.decr(key);
+	//		if (lock <= 1)
+	//		{
+	//			this.destroy(key);
+	//			return false;
+	//		}
+	//	}
+	//	return isLock;
+	//}
 
 	//目录扫描 交互锁定
 	public void scanFilesLock(MqScanConfMatch scanConfMatch, String className)
@@ -67,11 +66,11 @@ public class MQScanFilesLock extends RedisCompLock
 	}
 
 	//目录解锁    只在异常、初始化或手工时调用
-	public void scanFilesUnLock(MqScanConf scanConf, String className)
-	{
-		String key = className + ':' + scanConf.getScid();
-		this.destroy(key);
-	}
+	//public void scanFilesUnLock(MqScanConf scanConf, String className)
+	//{
+	//	String key = className + ':' + scanConf.getScid();
+	//	this.destroy(key);
+	//}
 
 	/**交互定义 相关锁定操作**/
 	//交互锁操作
